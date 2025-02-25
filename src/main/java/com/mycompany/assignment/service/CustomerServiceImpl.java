@@ -38,8 +38,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public Customer create(CreateCustomerRequest createCustomerRequest) {
-        Customer customer = new Customer(null, createCustomerRequest.getFirstName(), createCustomerRequest.getMiddleName(),
-                createCustomerRequest.getLastName(), createCustomerRequest.getEmail(), createCustomerRequest.getPhone());
+        Customer customer = new Customer(null, createCustomerRequest.firstName(), createCustomerRequest.middleName(),
+                createCustomerRequest.lastName(), createCustomerRequest.email(), createCustomerRequest.phone());
         return customerRepository.save(customer);
     }
 
@@ -50,18 +50,18 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public Customer update(UpdateCustomerRequest updateCustomerRequest) {
-        return findById(updateCustomerRequest.getId()).map(customer -> {
-            customer.setFirstName(updateCustomerRequest.getFirstName());
-            customer.setLastName(updateCustomerRequest.getLastName());
-            customer.setEmail(updateCustomerRequest.getEmail());
-            customer.setMiddleName(updateCustomerRequest.getMiddleName());
-            customer.setPhone(updateCustomerRequest.getPhone());
+        return findById(updateCustomerRequest.id()).map(customer -> {
+            customer.setFirstName(updateCustomerRequest.firstName());
+            customer.setLastName(updateCustomerRequest.lastName());
+            customer.setEmail(updateCustomerRequest.email());
+            customer.setMiddleName(updateCustomerRequest.middleName());
+            customer.setPhone(updateCustomerRequest.phone());
             return customerRepository.save(customer);
         }).orElse(null);
     }
 
     /**
-     * @param id
+     * Deletes an existing customer by its id of type UUID
      */
     @Override
     @Transactional
@@ -70,8 +70,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     /**
-     * @param id
-     * @return
+     * Finds a customer by its id of type UUID
      */
     @Override
     public Optional<Customer> findById(UUID id) {

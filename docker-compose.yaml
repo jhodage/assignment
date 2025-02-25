@@ -1,7 +1,6 @@
   services:
     springboot-app:
       image: springboot-app
-      #restart: always
       build: .
       ports:
         - "9090:8080"
@@ -19,8 +18,5 @@
         -  ~/data/mysqldb:/var/lib/mysql
       ports:
         - "3307:3306"
-      #environment:
-       # MYSQL_DATABASE: assignment
-        #MYSQL_ROOT_PASSWORD: root
       env_file:
         - src/main/resources/mysql.env

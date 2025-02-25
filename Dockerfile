@@ -1,3 +1,5 @@
 FROM openjdk:17
-ADD  target/assignment.jar assignment.jar
+WORKDIR /app
+ADD  target/assignment.jar ./assignment.jar
+EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "assignment.jar"]
