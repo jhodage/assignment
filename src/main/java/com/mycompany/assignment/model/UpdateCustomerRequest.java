@@ -1,17 +1,18 @@
 package com.mycompany.assignment.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
 
 import java.util.UUID;
 
-@Data
-@AllArgsConstructor
-public class UpdateCustomerRequest {
+@Getter
+public class UpdateCustomerRequest extends CreateCustomerRequest {
+    @NotNull
     private final UUID id;
-    private final String firstName;
-    private final String middleName;
-    private final String lastName;
-    private final String phone;
-    private final String email;
+
+    public UpdateCustomerRequest(UUID id, String firstName, String middleName,
+                                 String lastName, String phone, String email) {
+        super(firstName, middleName, lastName, phone, email);
+        this.id = id;
+    }
 }

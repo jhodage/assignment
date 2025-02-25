@@ -6,25 +6,27 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "customer", uniqueConstraints = {@UniqueConstraint(name = "customer_email_uk", columnNames = {"email"})})
+@Table(name = "customer", uniqueConstraints = {@UniqueConstraint(name = "${email.unique.constraint.name}", columnNames = {"email"})})
 @Entity
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @NotNull
+    @Column(nullable = false)
     private String firstName;
     private String middleName;
-    @NotNull
+    @Column(nullable = false)
     private String lastName;
     @Email
-    @Column(name = "email", unique = true)
+    @Column(unique = true)
     private String email;
+    @Column(nullable = false)
     private String phone;
 }
